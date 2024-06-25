@@ -4,10 +4,13 @@ from django.db import models
 
 class XpLog(models.Model):
 
-    # TODO make Source TYPE and Source ID correctly
-    # user_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    # habit_id = models.ForeignKey(Habit, on_delete=models.CASCADE)
+    user = models.ForeignKey('users.User', on_delete=models.CASCADE)
+    habit = models.ForeignKey('habits.Habit', on_delete=models.CASCADE)
+    source_type = models.CharField(20)
     xp_value = models.IntegerField()
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.xp_value
