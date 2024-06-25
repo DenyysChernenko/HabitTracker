@@ -8,7 +8,7 @@ class User(models.Model):
     # TODO correct handling password attribute
     username = models.CharField(max_length=55)
     email = models.EmailField()
-    password = models.CharField(max_length=55)
+    password = models.CharField()
     experience = models.IntegerField()
     level = models.IntegerField()
 
