@@ -5,8 +5,8 @@ from django.db import models
 
 class Achievement(models.Model):
 
-    name = models.CharField(max_length=100)
-    description = models.CharField(max_length=255)
+    name = models.CharField()
+    description = models.CharField()
     user = models.ForeignKey('users.User', on_delete=models.CASCADE)
     requirements = models.TextField()
     reward = models.TextField()

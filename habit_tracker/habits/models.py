@@ -5,8 +5,8 @@ from django.db import models
 
 class Habit(models.Model):
 
-    name = models.CharField(max_length=100)
-    description = models.CharField(max_length=255, blank=True, null=True)
+    name = models.CharField()
+    description = models.CharField(blank=True, null=True)
     start_date = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey('users.User', on_delete=models.CASCADE)
     end_date = models.DateTimeField()
