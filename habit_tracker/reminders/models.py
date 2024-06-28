@@ -15,3 +15,9 @@ class Reminder(models.Model):
 
     def __str__(self):
         return f"Reminder for Habit: {self.habit.name} - {self.message}"
+
+    class Meta:
+
+        verbose_name = 'Reminder'
+        verbose_name_plural = 'Reminders'
+        ordering = ['time']

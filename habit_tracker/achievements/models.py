@@ -17,3 +17,9 @@ class Achievement(models.Model):
 
     def __str__(self):
         return self.name
+
+    class Meta:
+
+        verbose_name = 'Achievement'
+        verbose_name_plural = 'Achievements'
+        ordering = ['name']

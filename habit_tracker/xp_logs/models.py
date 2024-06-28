@@ -14,3 +14,9 @@ class XpLog(models.Model):
 
     def __str__(self):
         return self.xp_value
+
+    class Meta:
+
+        verbose_name = 'XpLog'
+        verbose_name_plural = 'XpLogs'
+        ordering = ['xp_value']
