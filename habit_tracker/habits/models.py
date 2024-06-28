@@ -18,3 +18,9 @@ class Habit(models.Model):
 
     def __str__(self):
         return f"Habit: {self.name} with description: {self.description}, current has streak: {self.current_streak}"
+
+    class Meta:
+
+        verbose_name = 'Habit'
+        verbose_name_plural = 'Habits'
+        ordering = ['name']

@@ -17,3 +17,9 @@ class User(models.Model):
     def __str__(self):
         return f"User with username: '{self.username}' and level: '{self.level}'"
 
+    class Meta:
+
+        verbose_name = 'User'
+        verbose_name_plural = 'Users'
+        ordering = ['username']
+
