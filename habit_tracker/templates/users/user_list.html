@@ -19,13 +19,20 @@
         th {
             background-color: #f2f2f2;
         }
+        .profile-img {
+            width: 50px; /* Adjust size as needed */
+            height: auto;
+            border-radius: 50%; /* Optional: Rounded profile pictures */
+        }
     </style>
+    {% load static %}
 </head>
 <body>
     <h1>User List</h1>
     <table>
         <thead>
             <tr>
+                <th>Picture</th>
                 <th>Username</th>
                 <th>Email</th>
                 <th>Experience</th>
@@ -37,6 +44,13 @@
         <tbody>
             {% for user in users %}
             <tr>
+                <td>
+                    {% if user.profile_picture %}
+                        <img src="{{ user.profile_picture.url }}" alt="{{ user.username }}'s profile picture" class="profile-img">
+                    {% else %}
+                        <img src="{% static 'images/default_user.png' %}" class="profile-img">
+                    {% endif %}
+                </td>
                 <td>{{ user.username }}</td>
                 <td>{{ user.email }}</td>
                 <td>{{ user.experience }}</td>

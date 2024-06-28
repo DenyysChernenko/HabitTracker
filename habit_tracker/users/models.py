@@ -10,6 +10,8 @@ class User(models.Model):
     password = models.CharField()
     experience = models.IntegerField(default=0)
     level = models.IntegerField(default=1)
+    profile_picture = models.ImageField(upload_to='profile_pics/', null=True, blank=True,
+                                        default='images/default_user.png')
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
