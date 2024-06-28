@@ -4,5 +4,4 @@ venv/
 .idea/
 poetry.lock
 db.sqlite3
-**/migrations/
 *.pyc
