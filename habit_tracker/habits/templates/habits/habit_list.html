@@ -2,9 +2,56 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habit List</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <style>
+        .profile-img {
+            width: 75px;
+            height: auto;
+            border-radius: 50%;
+        }
+    </style>
 </head>
 <body>
-
+    <div class="container">
+        <h1 class="my-4 text-center">Habit List</h1>
+        <table class="table table-bordered table-striped">
+            <thead class="thead-light">
+                <tr>
+                    <th>Habit Picture</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Current Streak</th>
+                    <th>Completed</th>
+                    <th>User</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for habit in habits %}
+                <tr>
+                    <td>
+                        {% if habit.habit_picture %}
+                            <img src="{{ habit.habit_picture.url }}" alt="{{ habit.name }}'s profile picture" class="profile-img">
+                        {% else %}
+                            <img src="{% static 'images/habit_default.jpg' %}" class="profile-img">
+                        {% endif %}
+                    </td>
+                    <td>{{ habit.name }}</td>
+                    <td>{{ habit.description }}</td>
+                    <td>{{ habit.start_date }}</td>
+                    <td>{{ habit.end_date }}</td>
+                    <td>{{ habit.current_streak }}</td>
+                    <td>{{ habit.is_completed|yesno:"Yes,No" }}</td>
+                    <td>{{habit.user.username}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
 </body>
 </html>

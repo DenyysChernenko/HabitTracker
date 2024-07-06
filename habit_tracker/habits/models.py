@@ -10,6 +10,7 @@ class Habit(models.Model):
     start_date = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey('users.User', on_delete=models.CASCADE)
     end_date = models.DateTimeField()
+    habit_picture = models.ImageField(upload_to='habit_pics/', null=True, blank=True)
     current_streak = models.IntegerField(default=0)
     is_completed = models.BooleanField(default=False)
 
