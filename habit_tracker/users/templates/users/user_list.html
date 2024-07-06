@@ -4,62 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User List</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        table, th, td {
-            border: 1px solid black;
-        }
-        th, td {
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
         .profile-img {
-            width: 50px; /* Adjust size as needed */
+            width: 50px;
             height: auto;
-            border-radius: 50%; /* Optional: Rounded profile pictures */
+            border-radius: 50%;
         }
     </style>
-    {% load static %}
 </head>
 <body>
-    <h1>User List</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Picture</th>
-                <th>Username</th>
-                <th>Email</th>
-                <th>Experience</th>
-                <th>Level</th>
-                <th>Created At</th>
-                <th>Updated At</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for user in users %}
-            <tr>
-                <td>
-                    {% if user.profile_picture %}
-                        <img src="{{ user.profile_picture.url }}" alt="{{ user.username }}'s profile picture" class="profile-img">
-                    {% else %}
-                        <img src="{% static 'images/default_user.png' %}" class="profile-img">
-                    {% endif %}
-                </td>
-                <td>{{ user.username }}</td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.experience }}</td>
-                <td>{{ user.level }}</td>
-                <td>{{ user.created_at }}</td>
-                <td>{{ user.updated_at }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <h1 class="my-4 text-center">User List</h1>
+    <div class="container">
+        <table class="table table-bordered table-striped">
+            <thead class="thead-light">
+                <tr>
+                    <th>Picture</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Experience</th>
+                    <th>Level</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td>
+                        {% if user.profile_picture %}
+                            <img src="{{ user.profile_picture.url }}" alt="{{ user.username }}'s profile picture" class="profile-img">
+                        {% else %}
+                            <img src="{% static 'images/default_user.png' %}" class="profile-img">
+                        {% endif %}
+                    </td>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.experience }}</td>
+                    <td>{{ user.level }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
 </body>
 </html>

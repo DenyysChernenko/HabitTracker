@@ -2,9 +2,35 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XP Log List</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
 </head>
 <body>
-
+    <div class="container">
+        <h1 class="my-4 text-center">XP Log List</h1>
+        <table class="table table-bordered table-striped">
+            <thead class="thead-light">
+                <tr>
+                    <th>User</th>
+                    <th>Habit</th>
+                    <th>Source Type</th>
+                    <th>XP Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for xp_log in xp_logs %}
+                <tr>
+                    <td>{{ xp_log.user.username }}</td>
+                    <td>{{ xp_log.habit.name }}</td>
+                    <td>{{ xp_log.source_type }}</td>
+                    <td>{{ xp_log.xp_value }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
 </body>
 </html>

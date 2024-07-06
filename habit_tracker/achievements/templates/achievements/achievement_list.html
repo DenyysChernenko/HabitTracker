@@ -2,9 +2,39 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Achievement List</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
 </head>
 <body>
-
+    <div class="container">
+        <h1 class="my-4 text-center">Achievement List</h1>
+        <table class="table table-bordered table-striped">
+            <thead class="thead-light">
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Requirements</th>
+                    <th>Reward</th>
+                    <th>Achieved</th>
+                    <th>User</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for achievement in achievements %}
+                <tr>
+                    <td>{{ achievement.name }}</td>
+                    <td>{{ achievement.description }}</td>
+                    <td>{{ achievement.requirements }}</td>
+                    <td>{{ achievement.reward }}</td>
+                    <td>{{ achievement.is_achieved|yesno:"Yes,No" }}</td>
+                    <td>{{ achievement.user.username }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
 </body>
 </html>
