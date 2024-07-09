@@ -1,51 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User List</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-    <style>
-        .profile-img {
-            width: 50px;
-            height: auto;
-            border-radius: 50%;
-        }
-    </style>
-</head>
-<body>
-    <h1 class="my-4 text-center">User List</h1>
-    <div class="container">
-        <table class="table table-bordered table-striped">
-            <thead class="thead-light">
-                <tr>
-                    <th>Picture</th>
-                    <th>Username</th>
-                    <th>Email</th>
-                    <th>Experience</th>
-                    <th>Level</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for user in users %}
-                <tr>
-                    <td>
-                        {% if user.profile_picture %}
-                            <img src="{{ user.profile_picture.url }}" alt="{{ user.username }}'s profile picture" class="profile-img">
-                        {% else %}
-                            <img src="{% static 'images/default_user.png' %}" class="profile-img">
-                        {% endif %}
-                    </td>
-                    <td>{{ user.username }}</td>
-                    <td>{{ user.email }}</td>
-                    <td>{{ user.experience }}</td>
-                    <td>{{ user.level }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
-    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block title %}User List{% endblock %}
+
+{% block content %}
+{% load static %}
+<style>
+    .profile-img {
+        width: 150px;
+        height: auto;
+    }
+    .container {
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+</style>
+<div class="container">
+    <ol class="list-group list-group-numbered">
+        {% for user in users %}
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+                <div class="fw-bold">{{ user.username }}</div>
+                <p>{{ user.email }}</p>
+                <p>Experience: {{ user.experience }}</p>
+                <p>Level: {{ user.level }}</p>
+            </div>
+                {% if user.profile_picture %}
+                    <img src="{{ user.profile_picture.url }}" alt="{{ user.username }}'s profile picture" class="profile-img">
+                {% else %}
+                    <img src="{% static 'images/default_user.png' %}" class="profile-img">
+                {% endif %}
+        </li>
+        {% endfor %}
+    </ol>
+</div>
+{% endblock %}
