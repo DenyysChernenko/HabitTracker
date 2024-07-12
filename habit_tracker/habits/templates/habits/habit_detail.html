@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}Habit Detail{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>{{ habit.name }}</h1>
+    <p><strong>Description:</strong> {{ habit.description }}</p>
+    <p><strong>Start Date:</strong> {{ habit.start_date }}</p>
+    <p><strong>End Date:</strong> {{ habit.end_date }}</p>
+    <p><strong>Current Streak:</strong> {{ habit.current_streak }}</p>
+    <p><strong>Completed:</strong> {{ habit.is_completed|yesno:"Yes,No" }}</p>
+    <p><strong>Created At:</strong> {{ habit.created_at }}</p>
+    <p><strong>Updated At:</strong> {{ habit.updated_at }}</p>
+    {% if habit.habit_picture %}
+        <p><strong>Habit Picture:</strong></p>
+        <img src="{{ habit.habit_picture.url }}" alt="Habit Picture" class="img-fluid">
+    {% endif %}
+</div>
+{% endblock %}
