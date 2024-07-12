@@ -3,18 +3,53 @@
 {% block title %}Habit Detail{% endblock %}
 
 {% block content %}
+<style>
+    .container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 50px;
+    }
+    .picture-habit {
+        flex-shrink: 0;
+        width: 200px;
+        height: auto;
+        object-fit: cover;
+        border-radius: 50%;
+        margin-right: 150px;
+    }
+    .habit-details {
+        display: flex;
+        flex-direction: column;
+        max-width: 600px;
+    }
+    .habit-details p {
+        margin: 5px 0;
+        font-size: 25px;
+    }
+
+    .border {
+       padding: 20px;
+       margin: 10px;
+    }
+
+</style>
+
+{% load static %}
 <div class="container">
-    <h1>{{ habit.name }}</h1>
-    <p><strong>Description:</strong> {{ habit.description }}</p>
-    <p><strong>Start Date:</strong> {{ habit.start_date }}</p>
-    <p><strong>End Date:</strong> {{ habit.end_date }}</p>
-    <p><strong>Current Streak:</strong> {{ habit.current_streak }}</p>
-    <p><strong>Completed:</strong> {{ habit.is_completed|yesno:"Yes,No" }}</p>
-    <p><strong>Created At:</strong> {{ habit.created_at }}</p>
-    <p><strong>Updated At:</strong> {{ habit.updated_at }}</p>
-    {% if habit.habit_picture %}
-        <p><strong>Habit Picture:</strong></p>
-        <img src="{{ habit.habit_picture.url }}" alt="Habit Picture" class="img-fluid">
-    {% endif %}
+    <div class="picture-habit">
+        <img src="{% if habit.habit_picture %}{{ habit.habit_picture.url }}{% else %}{% static 'images/habit_default.jpg' %}{% endif %}" alt="{{ habit.name }}'s profile picture">
+    </div>
+    <div class="habit-details">
+        <span class="border">
+        <h1>{{ habit.name }}</h1>
+        <hr style="height: 4px; border: none; background-color: #000; width: 100%;">
+        <p><strong>Description:</strong>  {{ habit.description }}</p>
+        <p><strong>Start Date:</strong>  {{ habit.start_date }}</p>
+        <p><strong>End Date:</strong>  {{ habit.end_date }}</p>
+        <p><strong>Current Streak:</strong>  {{ habit.current_streak }}</p>
+        <p><strong>Completed:</strong>  {{ habit.is_completed|yesno:"Yes,No" }}</p>
+        </span>
+    </div>
 </div>
 {% endblock %}
