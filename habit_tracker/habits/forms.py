@@ -11,7 +11,8 @@ class HabitForm(ModelForm):
         model = Habit
         fields = ['name', 'description', 'end_date', 'current_streak', 'is_completed', 'user']
         widgets = {
-            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'name': forms.TextInput(attrs={'class': 'form-control',
+                                           'placeholder': 'Your Name'}),
             'description': forms.Textarea(attrs={'class': 'form-control'}),
             'start_date': forms.DateTimeInput(attrs={'class': 'form-control'}),
             'end_date': forms.DateTimeInput(attrs={

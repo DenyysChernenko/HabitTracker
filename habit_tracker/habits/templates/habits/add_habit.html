@@ -6,7 +6,6 @@
 <section>
     <h2>Add Habit</h2>
     <p>Insert your details below:</p>
-
     <form class="needs-validation" novalidate action="{% url 'add_habit' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
