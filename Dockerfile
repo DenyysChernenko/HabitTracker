@@ -1,21 +1,21 @@
-FROM python:3.10-slim
+# Dockerfile
+
+FROM python:3.10
 
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
+# Set the working directory
 WORKDIR /app
 
-RUN apt-get update && apt-get install -y \
-    build-essential \
-    libpq-dev \
-    && apt-get clean
+# Copy the requirements file into the container
+COPY requirements.txt .
 
-COPY requirements.txt /app/
-RUN pip install --upgrade pip
-RUN pip install -r requirements.txt
+# Install any dependencies
+RUN pip install --no-cache-dir -r requirements.txt
 
-COPY . /app/
+# Copy the rest of the application code
+COPY . .
 
-EXPOSE 8800
-
-CMD ["python", "habit_tracker/manage.py", "runserver", "0.0.0.0:8800"]
+# Expose the port that Django is running on
+EXPOSE 8001
