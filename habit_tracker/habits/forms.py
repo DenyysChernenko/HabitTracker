@@ -1,6 +1,8 @@
 from django import forms
 from .models import Habit
 from django.forms import ModelForm
+from django.core.exceptions import ValidationError
+from django.utils import timezone
 
 
 class HabitForm(ModelForm):
@@ -11,17 +13,17 @@ class HabitForm(ModelForm):
         model = Habit
         fields = ['name', 'description', 'end_date', 'current_streak', 'is_completed', 'user']
         widgets = {
-            'name': forms.TextInput(attrs={'class': 'form-control',
-                                           'placeholder': 'Your Name'}),
-            'description': forms.Textarea(attrs={'class': 'form-control',
-                                                 'placeholder': 'Your Description'}),
-            'start_date': forms.DateTimeInput(attrs={'class': 'form-control'}),
-            'end_date': forms.DateTimeInput(attrs={
-                'class': 'form-control',
-                'type': 'datetime-local'
-            }),
+            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Your Name'}),
+            'description': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Your Description'}),
+            'start_date': forms.DateInput(attrs={'class': 'form-control', 'readonly': 'readonly'}),
+            'end_date': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
             'current_streak': forms.NumberInput(attrs={'class': 'form-control'}),
             'is_completed': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
             'user': forms.Select(attrs={'class': 'form-control'}),
         }
 
+    def clean_end_date(self):
+        end_date = self.cleaned_data.get('end_date')
+        if end_date < timezone.now().date():
+            raise ValidationError("The end date cannot be in the past.")
+        return end_date
