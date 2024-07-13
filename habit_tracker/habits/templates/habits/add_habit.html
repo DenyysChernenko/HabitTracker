@@ -3,10 +3,32 @@
 {% block content %}
 {% load static %}
 
-<section>
-    <h2>Add Habit</h2>
+<style>
+
+    .centered-section {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+
+    .centered-form {
+        width: 100%;
+        max-width: 500px;
+        margin: 0 auto;
+    }
+
+    .btn-primary {
+        display: block;
+        margin: 0 auto;
+    }
+</style>
+
+<section class="centered-section">
+   <h1 class="my-4 text-center" style="font-family: 'Arial', sans-serif; font-weight: bold; color: #333; text-shadow: 1px 1px 1px #ccc;">Add Habit</h1>
     <p>Insert your details below:</p>
-    <form class="needs-validation" novalidate action="{% url 'add_habit' %}" method="post" enctype="multipart/form-data">
+    <form class="needs-validation centered-form" novalidate action="{% url 'add_habit' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit" class="btn btn-primary">Add Habit</button>

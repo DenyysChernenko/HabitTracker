@@ -13,7 +13,8 @@ class HabitForm(ModelForm):
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control',
                                            'placeholder': 'Your Name'}),
-            'description': forms.Textarea(attrs={'class': 'form-control'}),
+            'description': forms.Textarea(attrs={'class': 'form-control',
+                                                 'placeholder': 'Your Description'}),
             'start_date': forms.DateTimeInput(attrs={'class': 'form-control'}),
             'end_date': forms.DateTimeInput(attrs={
                 'class': 'form-control',
