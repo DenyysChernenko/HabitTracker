@@ -3,39 +3,13 @@
 {% block title %}Habit Detail{% endblock %}
 
 {% block content %}
-<style>
-    .container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-top: 50px;
-    }
-    .picture-habit {
-        flex-shrink: 0;
-        width: 200px;
-        height: auto;
-        object-fit: cover;
-        border-radius: 50%;
-        margin-right: 150px;
-    }
-    .habit-details {
-        display: flex;
-        flex-direction: column;
-        max-width: 600px;
-    }
-    .habit-details p {
-        margin: 5px 0;
-        font-size: 25px;
-    }
-
-    .border {
-       padding: 20px;
-       margin: 10px;
-    }
-
-</style>
-
 {% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/habit_detail.css' %}">
+{% endblock %}
+
+
 <div class="container">
     <div class="picture-habit">
         <img src="{% if habit.habit_picture %}{{ habit.habit_picture.url }}{% else %}{% static 'images/habit_default.jpg' %}{% endif %}" alt="{{ habit.name }}'s profile picture">

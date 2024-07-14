@@ -3,42 +3,12 @@
 {% block title %}User Detail{% endblock %}
 
 {% block content %}
-<style>
-    .container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-top: 50px;
-    }
-    .profile-picture {
-        width: 250px;
-        height: 250px;
-        margin-right: 20px;
-    }
-    .profile-picture img {
-        width: 100%;
-        height: auto;
-        object-fit: cover;
-        border-radius: 8px;
-    }
-    .user-details {
-        display: flex;
-        flex-direction: column;
-        max-width: 600px;
-    }
-    .user-details p {
-        margin: 5px 0;
-        font-size: 18px;
-    }
-    .border {
-        padding: 20px;
-        margin: 10px;
-        border: 1px solid #ccc;
-        border-radius: 8px;
-    }
-</style>
-
 {% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/user_detail.css' %}">
+{% endblock %}
+
 <div class="container">
     <div class="profile-picture">
         <img src="{% if user.profile_picture %}{{ user.profile_picture.url }}{% else %}{% static 'images/default_user.png' %}{% endif %}" alt="{{ user.username }}'s profile picture">
