@@ -1,0 +1,46 @@
+.profile-img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-top: 25px;
+}
+.container {
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+.btn-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+.btn-detail, .btn-delete, .btn-primary-apply {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    border: none;
+    border-radius: 4px;
+    text-align: center;
+    text-decoration: none;
+}
+.btn-detail, .btn-primary-apply {
+    color: #fff;
+    background-color: #007bff;
+}
+.btn-detail:hover, .btn-primary-apply:hover {
+    background-color: #0056b3;
+}
+.btn-delete {
+    background-color: #dc3545;
+    color: white;
+}
+.btn-delete:hover {
+    background-color: #c82333;
+}
+.list-group-item {
+    position: relative;
+}
+
+.btn-primary-apply {
+    margin-bottom: 40px;
+    padding: 10px;
+}

@@ -3,27 +3,9 @@
 {% block content %}
 {% load static %}
 
-<style>
-
-    .centered-section {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        min-height: 100vh;
-    }
-
-    .centered-form {
-        width: 100%;
-        max-width: 500px;
-        margin: 0 auto;
-    }
-
-    .btn-primary {
-        display: block;
-        margin: 0 auto;
-    }
-</style>
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/add.css' %}">
+{% endblock %}
 
 <section class="centered-section">
    <h1 class="my-4 text-center" style="font-family: 'Arial', sans-serif; font-weight: bold; color: #333; text-shadow: 1px 1px 1px #ccc;">Add User</h1>
