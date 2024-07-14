@@ -18,9 +18,9 @@
     .btn-container {
         display: flex;
         gap: 10px;
-        margin-top: 10px;
+        margin-bottom: 20px;
     }
-    .btn-detail, .btn-delete {
+    .btn-detail, .btn-delete, .btn-primary-apply {
         display: inline-block;
         padding: 10px 20px;
         font-size: 0.9rem;
@@ -29,11 +29,11 @@
         text-align: center;
         text-decoration: none;
     }
-    .btn-detail {
+    .btn-detail, .btn-primary-apply {
         color: #fff;
         background-color: #007bff;
     }
-    .btn-detail:hover {
+    .btn-detail:hover, .btn-primary-apply:hover {
         background-color: #0056b3;
     }
     .btn-delete {
@@ -46,10 +46,31 @@
     .list-group-item {
         position: relative;
     }
+
+    .btn-primary-apply {
+        margin-bottom: 40px;
+        padding: 10px;
+    }
 </style>
 <div class="container">
+    <h1 class="my-4 text-center">{{ title }}</h1>
+
+    <!-- Filter Form -->
+    <form method="get" action="{% url 'user_list' %}">
+        <div class="mb-3">
+            <label for="level" class="form-label">Minimum Level:</label>
+            <input type="number" id="level" name="level" class="form-control" value="{{ level }}">
+        </div>
+        <div class="mb-3">
+            <label for="experience" class="form-label">Minimum Experience:</label>
+            <input type="number" id="experience" name="experience" class="form-control" value="{{ experience }}">
+        </div>
+        <button type="submit" class="btn btn-primary-apply">Apply Filters</button>
+        <a href="{% url 'user_list' %}" class="btn btn-primary-apply">Clear Filters</a>
+    </form>
+
+    <!-- User List -->
     <ol class="list-group list-group-numbered">
-        <h1 class="my-4 text-center" style="font-family: 'Arial', sans-serif; font-weight: bold; color: #333; text-shadow: 1px 1px 1px #ccc;">{{ title }}</h1>
         {% for user in object_list %}
         <li class="list-group-item d-flex justify-content-between align-items-start">
             <div class="ms-2 me-auto">
@@ -58,15 +79,15 @@
                 <p>Experience: {{ user.experience }}</p>
                 <p>Level: {{ user.level }}</p>
                 <div class="btn-container">
-                    <a href="{% url 'user_detail' user.id %}" class="btn-detail">Detail</a>
-                    <a href="{% url 'user_update' user.id %}" class="btn-detail">Edit</a>
-                    <a href="{% url 'user_delete' user.id %}" class="btn-delete">Delete</a>
+                    <a href="{% url 'user_detail' user.id %}" class="btn btn-primary">Detail</a>
+                    <a href="{% url 'user_update' user.id %}" class="btn btn-primary">Edit</a>
+                    <a href="{% url 'user_delete' user.id %}" class="btn btn-delete">Delete</a>
                 </div>
             </div>
             {% if user.profile_picture %}
                 <img src="{{ user.profile_picture.url }}" alt="{{ user.username }}'s profile picture" class="profile-img">
             {% else %}
-                <img src="{% static 'images/default_user.png' %}" class="profile-img">
+                <img src="{% static 'images/default_user.png' %}" alt="Default profile picture" class="profile-img">
             {% endif %}
         </li>
         {% endfor %}

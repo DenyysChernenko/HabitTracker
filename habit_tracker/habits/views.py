@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Habit
 from .forms import HabitForm
+from django.utils.dateparse import parse_date
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 
@@ -16,6 +17,22 @@ class HabitDetail(DetailView):
 class HabitListView(ListView):
     model = Habit
     extra_context = {'title': 'Habit List'}
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+
+        name = self.request.GET.get('name')
+        start_date = self.request.GET.get('start_date')
+
+        if name:
+            queryset = queryset.filter(name__icontains=name)
+
+        if start_date:
+            parsed_start_date = parse_date(start_date)
+            if parsed_start_date:
+                queryset = queryset.filter(start_date__gte=parsed_start_date)
+
+        return queryset
 
 
 class CreateHabit(CreateView):
