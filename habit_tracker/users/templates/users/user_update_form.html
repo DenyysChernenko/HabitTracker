@@ -1,11 +1,12 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
+
+{% block title %} Update User {% endblock %}
 
 {% block content %}
 {% load static %}
 
 <style>
-
-       .centered-section {
+    .centered-section {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -54,13 +55,14 @@
 </style>
 
 <section class="centered-section">
-   <h1 class="my-4 text-center" style="font-family: 'Arial', sans-serif; font-weight: bold; color: #333; text-shadow: 1px 1px 1px #ccc;">Add Habit</h1>
-    <p>Insert your details below:</p>
-    <form class="needs-validation centered-form" novalidate action="{% url 'add_habit' %}" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-primary">Add Habit</button>
-    </form>
+    <div class="container">
+        <h1 class="my-4 text-center" style="font-family: 'Arial', sans-serif; font-weight: bold; color: #333; text-shadow: 1px 1px 1px #ccc;">Edit User</h1>
+        <form class="needs-validation centered-form" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+    </div>
 </section>
 
 {% endblock %}
