@@ -23,3 +23,12 @@ class UserForm(ModelForm):
         if len(password) < 8:
             raise ValidationError("Password Must be At least 8 Characters")
         return password
+
+    def clean_username(self):
+        username = self.cleaned_data['username']
+        all_usernames = [user.username for user in User.objects.all()]
+
+        if username in all_usernames:
+            raise forms.ValidationError("Username already exists. Please choose a different username.")
+
+        return username

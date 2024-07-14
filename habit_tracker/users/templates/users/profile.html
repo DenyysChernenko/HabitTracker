@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% load static %}
+<style>
+    .center-left-buttons {
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+    }
+    .center-left-buttons a {
+        margin: 15px 0;
+        padding: 15px;
+    }
+
+</style>
+
+<section class="center-left-buttons">
+    <a href="{% url 'habit_list' %}" class="btn btn-primary">Habit List</a>
+    <a href="{% url 'user_list' %}" class="btn btn-primary">User List</a>
+</section>
+
+{% endblock %}
