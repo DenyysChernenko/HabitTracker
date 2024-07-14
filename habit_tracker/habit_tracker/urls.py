@@ -27,7 +27,7 @@ urlpatterns = [
     path('reminders/', include('reminders.urls')),
     path('xp_logs/', include('xp_logs.urls')),
     path('achievements/', include('achievements.urls')),
-    path('', include('habits.urls'))
+    path('', include('users.urls'))
 ]
 
 if settings.DEBUG:

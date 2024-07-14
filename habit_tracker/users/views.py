@@ -27,3 +27,7 @@ def add_user(request):
     else:
         form = UserForm()
     return render(request, 'users/add_user.html', {'form': form})
+
+
+def profile(request):
+    return render(request, 'users/profile.html')
