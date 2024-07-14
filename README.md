@@ -44,6 +44,38 @@ python manage.py migrate
 python manage.py runserver
 ```
 
+## Running with Docker
+
+To run this application using Docker, follow these steps:
+
+1. Clone the repository:
+```
+git clone https://github.com/DenyysChernenko/HabitTracker.git
+cd HabitTracker
+```
+
+2. Build the Docker image and start the container:
+```bash
+docker-compose up --build
+```
+
+3. Access the application:
+```bash
+http://localhost:8001
+```
+
+4. Initialize the database
+```
+docker-compose exec web python manage.py migrate
+```
+
+## Explanation
+1. *Cloning the Repository*: This step remains the same as in the previous sections.
+2. *Building and Running Docker*: Use docker-compose up --build to build the Docker image defined in your docker-compose.yml and start the container.
+3. *Accessing the Application*: After Docker starts the container, your application should be accessible at ```http://localhost:8001```.
+4. *Initializing the Database*: If it's your first time running the application with Docker, you may need to apply initial migrations to set up the database. 
+This is done using docker-compose exec web python manage.py migrate
+
 ## Usage
 1. **Create a Habit**:
 Log in or register if you are a new user.
