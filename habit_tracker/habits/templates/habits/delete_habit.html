@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %} Delete Habit {% endblock %}
+
+{% block content %}
+{% load static %}
+
+<style>
+    .confirmation-text {
+        text-align: center;
+        font-family: 'Arial', sans-serif;
+        font-size: 1.0rem;
+        color: #333;
+        margin: 20px 0;
+    }
+    .btn-confirm {
+        display: block;
+        padding: 10px 20px;
+        margin: 20px auto;
+        font-size: 1rem;
+        color: #fff;
+        background-color: #007bff;
+        border: none;
+        border-radius: 4px;
+        text-align: center;
+        text-decoration: none;
+    }
+    .btn-confirm:hover {
+        background-color: #0056b3;
+    }
+</style>
+
+<section class="confirmation-section">
+    <div class="container">
+        <p class="confirmation-text">Are you sure you want to delete <strong>"{{ object }}"</strong>?</p>
+        <form method="post" class="text-center">{% csrf_token %}
+            {{ form }}
+            <input type="submit" value="Confirm" class="btn-confirm">
+        </form>
+    </div>
+</section>
+
+{% endblock %}
