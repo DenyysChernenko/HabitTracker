@@ -1,32 +1,25 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import User
 from .forms import UserForm
+from django.views.generic import ListView, DetailView, CreateView
 
 # Create your views here.
 
 
-def user_list(request):
-    users = User.objects.all()
-    return render(request, "users/user_list.html", {'users': users})
+class UserList(ListView):
+    model = User
+    extra_context = {'title': 'User List'}
 
 
-def user_detail(request, user_id):
-    user = get_object_or_404(User, pk=user_id)
-    context = {
-        'user': user
-    }
-    return render(request, 'users/user_detail.html', context)
+class UserDetail(DetailView):
+    model = User
+    context_object_name = 'user'
+    template_name = 'users/user_detail.html'
 
 
-def add_user(request):
-    if request.method == 'POST':
-        form = UserForm(request.POST, request.FILES)
-        if form.is_valid():
-            user = form.save()
-            return redirect('user_detail', user_id=user.pk)
-    else:
-        form = UserForm()
-    return render(request, 'users/add_user.html', {'form': form})
+class CreateUser(CreateView):
+    form_class = UserForm
+    template_name = 'users/add_user.html'
 
 
 def profile(request):

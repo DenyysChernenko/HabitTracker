@@ -47,9 +47,9 @@
     }
 </style>
 <div class="container">
-    <h1 class="my-4 text-center" style="font-family: 'Arial', sans-serif; font-weight: bold; color: #333; text-shadow: 1px 1px 1px #ccc;">Habit List</h1>
+    <h1 class="my-4 text-center" style="font-family: 'Arial', sans-serif; font-weight: bold; color: #333; text-shadow: 1px 1px 1px #ccc;">{{ title }}</h1>
     <div class="row">
-        {% for habit in habits %}
+        {% for habit in object_list %}
         <div class="col-12 mb-4">
             <div class="card-habit-card">
                 <img src="{% if habit.habit_picture %}{{ habit.habit_picture.url }}{% else %}{% static 'images/habit_default.jpg' %}{% endif %}" class="profile-img" alt="{{ habit.name }}'s profile picture">
