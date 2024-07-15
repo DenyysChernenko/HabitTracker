@@ -17,6 +17,7 @@ class HabitDetail(DetailView):
 class HabitListView(ListView):
     model = Habit
     extra_context = {'title': 'Habit List'}
+    paginate_by = 5
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -32,7 +33,7 @@ class HabitListView(ListView):
             if parsed_start_date:
                 queryset = queryset.filter(start_date__gte=parsed_start_date)
 
-        return queryset
+        return queryset.select_related('user')
 
 
 class CreateHabit(CreateView):
