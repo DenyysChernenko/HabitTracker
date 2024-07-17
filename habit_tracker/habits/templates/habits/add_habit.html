@@ -8,11 +8,27 @@
 {% endblock %}
 
 <section class="centered-section">
-   <h1 class="my-4 text-center" style="font-family: 'Arial', sans-serif; font-weight: bold; color: #333; text-shadow: 1px 1px 1px #ccc;">Add Habit</h1>
+    <h1 class="my-4 text-center" style="font-family: 'Arial', sans-serif; font-weight: bold; color: #333; text-shadow: 1px 1px 1px #ccc;">Add Habit</h1>
     <p>Insert your details below:</p>
     <form class="needs-validation centered-form" novalidate action="{% url 'add_habit' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form.as_p }}
+        {{ form.non_field_errors }}
+        <div class="form-group">
+            {{ form.name.label_tag }}
+            {{ form.name }}
+        </div>
+        <div class="form-group">
+            {{ form.description.label_tag }}
+            {{ form.description }}
+        </div>
+        <div class="form-group">
+            {{ form.end_date.label_tag }}
+            {{ form.end_date }}
+        </div>
+        <div class="form-group">
+            {{ form.current_streak.label_tag }}
+            {{ form.current_streak }}
+        </div>
         <button type="submit" class="btn btn-primary">Add Habit</button>
     </form>
 </section>

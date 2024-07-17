@@ -17,7 +17,9 @@ def home(request):
 
 @login_required
 def profile(request):
-    return render(request, 'users/profile.html')
+    user = request.user
+    print(vars(user))
+    return render(request, 'users/profile.html', {'user': user})
 
 
 class RegisterView(CreateView):

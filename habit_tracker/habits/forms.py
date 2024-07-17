@@ -11,15 +11,13 @@ class HabitForm(ModelForm):
             widget=forms.DateTimeInput(attrs={'class': 'form-control', 'readonly': 'readonly'}))
 
         model = Habit
-        fields = ['name', 'description', 'end_date', 'current_streak', 'is_completed', 'user']
+        fields = ['name', 'description', 'end_date', 'current_streak', 'is_completed']
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Your Name'}),
             'description': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Your Description'}),
             'start_date': forms.DateInput(attrs={'class': 'form-control', 'readonly': 'readonly'}),
             'end_date': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
             'current_streak': forms.NumberInput(attrs={'class': 'form-control'}),
-            'is_completed': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
-            'user': forms.Select(attrs={'class': 'form-control'}),
         }
 
     def clean_end_date(self):
