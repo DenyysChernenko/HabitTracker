@@ -1,14 +1,30 @@
 from django.db import models
 from django.urls import reverse
-
+from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import BaseUserManager
 # Create your models here.
 
 
-class User(models.Model):
+class UserManager(BaseUserManager):
+    def create_user(self, username, email, password=None, **extra_fields):
+        if not email:
+            raise ValueError('The Email field must be set')
+        email = self.normalize_email(email)
+        user = self.model(username=username, email=email, **extra_fields)
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
 
-    username = models.CharField(max_length=128)
-    email = models.EmailField(unique=True)
-    password = models.CharField()
+    def create_superuser(self, username, email, password=None, **extra_fields):
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
+
+        return self.create_user(username, email, password, **extra_fields)
+
+
+class User(AbstractUser):
+    objects = UserManager()
+
     experience = models.IntegerField(default=0)
     level = models.IntegerField(default=1)
     profile_picture = models.ImageField(upload_to='profile_pics/', null=True, blank=True)

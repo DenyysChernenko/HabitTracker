@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %} Login {% endblock %}
+{% block content %}
+{% load static %}
+
+<style>
+  .vh-100 {
+    min-height: 100vh;
+  }
+  .card-login {
+    background-color: #fff;
+    border-radius: 15px;
+  }
+  .form-outline {
+    margin-bottom: 1.5rem;
+  }
+  .btn-custom {
+    width: 100%;
+  }
+  .errorlist {
+    color: red;
+    margin-top: 0.5rem;
+  }
+</style>
+
+<section class="vh-100 gradient-custom">
+  <div class="container py-5 h-100">
+    <div class="row justify-content-center align-items-center h-100">
+      <div class="col-12 col-lg-8 col-xl-6">
+        <div class="card shadow-2-strong card-login">
+          <div class="card-body p-4 p-md-5">
+            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Login</h3>
+            <form method="POST">
+              {% csrf_token %}
+              {{ form.as_p }}
+
+              <div class="mt-4 pt-2">
+                <input data-mdb-ripple-init class="btn btn-primary btn-lg btn-custom" type="submit" value="Login" />
+              </div>
+
+              {% if form.non_field_errors %}
+              <div class="errorlist">
+                <ul>{{ form.non_field_errors }}</ul>
+              </div>
+              {% endif %}
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

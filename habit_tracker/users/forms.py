@@ -1,22 +1,15 @@
 from django import forms
 from .models import User
-from django.forms import ModelForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.core.exceptions import ValidationError
+from django.contrib.auth import get_user_model
 
 
-class UserForm(ModelForm):
+class CustomUserCreationForm(UserCreationForm):
+
     class Meta:
-        model = User
-        fields = ['username', 'email', 'password', 'profile_picture']
-        widgets = {
-            'username': forms.TextInput(attrs={'class': 'form-control',
-                                               'placeholder': 'Your Username'}),
-            'email': forms.EmailInput(attrs={'class': 'form-control',
-                                             'placeholder': 'youremail@gmail.com'}),
-            'password': forms.PasswordInput(attrs={'class': 'form-control',
-                                                   'placeholder': 'At least 8 characters'}),
-            'profile_picture': forms.FileInput(attrs={'class': 'form-control'})
-        }
+        model = get_user_model()
+        fields = UserCreationForm.Meta.fields + ('email', 'profile_picture',)
 
     def clean_password(self):
         password = self.cleaned_data.get('password')
@@ -24,11 +17,9 @@ class UserForm(ModelForm):
             raise ValidationError("Password Must be At least 8 Characters")
         return password
 
-    def clean_username(self):
-        username = self.cleaned_data['username']
-        all_usernames = [user.username for user in User.objects.all()]
 
-        if username in all_usernames:
-            raise forms.ValidationError("Username already exists. Please choose a different username.")
-
-        return username
+class CustomUserLoginForm(AuthenticationForm):
+    username = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control',
+                                                             'placeholder': 'Username'}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control',
+                                                                 'placeholder': 'Password'}))

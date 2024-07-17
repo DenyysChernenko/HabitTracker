@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from habit_tracker import settings
 
 # Create your models here.
 
@@ -9,7 +10,7 @@ class Habit(models.Model):
     name = models.CharField()
     description = models.CharField(blank=True, null=True)
     start_date = models.DateField(auto_now_add=True)
-    user = models.ForeignKey('users.User', on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     end_date = models.DateField()
     habit_picture = models.ImageField(upload_to='habit_pics/', null=True, blank=True)
     current_streak = models.IntegerField(default=0)

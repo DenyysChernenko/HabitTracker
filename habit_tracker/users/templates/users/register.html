@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block title %} Registration {% endblock %}
+{% block content %}
+{% load static %}
+
+<style>
+  .vh-100 {
+    min-height: 100vh;
+  }
+  .card-registration {
+    background-color: #fff;
+    border-radius: 15px;
+  }
+  .form-outline {
+    margin-bottom: 1.5rem;
+  }
+  .btn-custom {
+    width: 100%;
+  }
+  .errorlist {
+    color: red;
+    margin-top: 0.5rem;
+  }
+</style>
+
+<section class="vh-100 gradient-custom">
+  <div class="container py-5 h-100">
+    <div class="row justify-content-center align-items-center h-100">
+      <div class="col-12 col-lg-8 col-xl-6">
+        <div class="card shadow-2-strong card-registration">
+          <div class="card-body p-4 p-md-5">
+            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Registration Form</h3>
+            <form method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+
+              <div class="form-outline">
+                <label class="form-label" for="firstName">First Name</label>
+                <input type="text" id="firstName" name="first_name" class="form-control form-control-lg" required />
+                {% if form.first_name.errors %}
+                <ul class="errorlist">{{ form.first_name.errors }}</ul>
+                {% endif %}
+              </div>
+
+              <div class="form-outline">
+                <label class="form-label" for="lastName">Last Name</label>
+                <input type="text" id="lastName" name="last_name" class="form-control form-control-lg" required />
+                {% if form.last_name.errors %}
+                <ul class="errorlist">{{ form.last_name.errors }}</ul>
+                {% endif %}
+              </div>
+
+              <div class="form-outline">
+                <label class="form-label" for="username">Username</label>
+                <input type="text" id="username" name="username" class="form-control form-control-lg" required />
+                {% if form.username.errors %}
+                <ul class="errorlist">{{ form.username.errors }}</ul>
+                {% endif %}
+              </div>
+
+              <div class="form-outline">
+                <label class="form-label" for="emailAddress">Email</label>
+                <input type="email" id="emailAddress" name="email" class="form-control form-control-lg" required />
+                {% if form.email.errors %}
+                <ul class="errorlist">{{ form.email.errors }}</ul>
+                {% endif %}
+              </div>
+
+              <div class="form-outline">
+                <label class="form-label" for="password">Password</label>
+                <input type="password" id="password" name="password1" class="form-control form-control-lg" required />
+                {% if form.password1.errors %}
+                <ul class="errorlist">{{ form.password1.errors }}</ul>
+                {% endif %}
+              </div>
+
+              <div class="form-outline">
+                <label class="form-label" for="password2">Retype Password</label>
+                <input type="password" id="password2" name="password2" class="form-control form-control-lg" required />
+                {% if form.password2.errors %}
+                <ul class="errorlist">{{ form.password2.errors }}</ul>
+                {% endif %}
+              </div>
+
+              <div class="form-outline">
+                <label class="form-label" for="profilePicture">Profile Picture</label>
+                <input type="file" id="profilePicture" name="profile_picture" class="form-control form-control-lg" />
+                {% if form.profile_picture.errors %}
+                <ul class="errorlist">{{ form.profile_picture.errors }}</ul>
+                {% endif %}
+              </div>
+
+              <div class="mt-4 pt-2">
+                <input data-mdb-ripple-init class="btn btn-primary btn-lg btn-custom" type="submit" value="Register" />
+              </div>
+
+              {% if form.non_field_errors %}
+              <div class="errorlist">
+                <ul>{{ form.non_field_errors }}</ul>
+              </div>
+              {% endif %}
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
