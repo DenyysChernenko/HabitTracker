@@ -3,20 +3,47 @@
 {% block content %}
 {% load static %}
 <style>
-    .center-left-buttons {
+    .profile-img {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 50%;
+        margin-right: 150px;
+    }
+    .profile-container {
         display: flex;
-        flex-direction: column;
-        padding: 10px;
+        align-items: center;
     }
-    .center-left-buttons a {
-        margin: 15px 0;
-        padding: 15px;
+    .profile-details {
+        flex: 1;
     }
-
+    .center-items {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+        }
 </style>
 
-<section class="center-left-buttons">
-    <a href="{% url 'habit_list' %}" class="btn btn-primary">Habit List</a>
-</section>
-
+<div class="container mt-5">
+    <h1 class="mb-4 center-items">Profile</h1>
+    <div class="card">
+        <div class="card-body profile-container">
+            <div class="profile-details">
+                <h5 class="card-title"><strong>Username</strong>: {{ user.username }}</h5>
+                <p class="card-text"><strong>Email:</strong> {{ user.email }}</p>
+                <p class="card-text"><strong>First Name:</strong> {{ user.first_name }}</p>
+                <p class="card-text"><strong>Last Name:</strong> {{ user.last_name }}</p>
+                <p class="card-text"><strong>Level:</strong> {{ user.level }}</p>
+                <p class="card-text"><strong>Experience:</strong> {{ user.experience }}</p>
+            </div>
+            <div>
+                {% if user.profile_picture %}
+                    <img src="{{ user.profile_picture.url }}" class="profile-img" alt="{{ user.username }}'s profile picture">
+                {% else %}
+                    <img src="{% static 'images/default_user.png' %}" class="profile-img" alt="{{ user.username }}'s profile picture">
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

@@ -1,47 +1,50 @@
-
-   .centered-section {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    min-height: 100vh;
+.centered-section {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .centered-form {
-    width: 100%;
-    max-width: 500px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
+    display: flex;
+    flex-direction: column;
 }
 
-.centered-form .form-group {
-    margin-bottom: 1rem;
-}
-
-.centered-form label {
-    display: block;
-    margin-bottom: .5rem;
+.form-group label {
     font-weight: bold;
+    margin-bottom: 5px;
 }
 
-.centered-form input,
-.centered-form textarea,
-.centered-form select {
-    width: 100%;
-    padding: .5rem;
-    margin-bottom: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+.form-check-input {
+    margin-top: 10px;
+}
+
+.form-check-label {
+    margin-left: 5px;
 }
 
 .btn-primary {
-    display: block;
-    margin: 0 auto;
+    background-color: #007bff;
+    border-color: #007bff;
 }
 
-.text-center {
-    text-align: center;
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+.custom-check {
+    margin-top: -10px;
+    display: flex;
+    align-items: center;
+}
+
+.custom-check .form-check-input {
+    margin-top: 0;
+}
+
+.custom-check .form-check-label {
+    margin-left: 10px;
 }
