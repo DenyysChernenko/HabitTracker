@@ -1,10 +1,11 @@
 from django.db import models
+from habit_tracker import settings
 # Create your models here.
 
 
 class XpLog(models.Model):
 
-    user = models.ForeignKey('users.User', on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     habit = models.ForeignKey('habits.Habit', on_delete=models.CASCADE)
     source_type = models.CharField(20)
     xp_value = models.IntegerField()
