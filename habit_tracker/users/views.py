@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import User
+from habits.models import Habit
 from .forms import CustomUserCreationForm, CustomUserLoginForm
 from django.views.generic.edit import CreateView
 from django.contrib.auth.views import LoginView
@@ -18,8 +19,9 @@ def home(request):
 @login_required
 def profile(request):
     user = request.user
-    print(vars(user))
-    return render(request, 'users/profile.html', {'user': user})
+    user_habit = Habit.objects.filter(user=user)
+    habit_count = user_habit.count()
+    return render(request, 'users/profile.html', {'user': user, 'habit_count': habit_count})
 
 
 class RegisterView(CreateView):

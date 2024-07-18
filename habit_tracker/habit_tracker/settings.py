@@ -48,7 +48,9 @@ INSTALLED_APPS = [
     'reminders',
     'xp_logs',
     'achievements',
-    'debug_toolbar'
+    'debug_toolbar',
+    'levelconfigs',
+
 ]
 
 MIDDLEWARE = [
