@@ -31,7 +31,7 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ habit.name }}</h5>
                     <p class="card-text">{{ habit.description|truncatechars:40 }}</p>
-                    <p><strong>End Date:</strong> {{ habit.end_date }}</p>
+                    <p><strong>Is completed:</strong> {{ habit.is_completed|yesno:"Yes,No" }}</p>
                     <p><strong>Current Streak:</strong> {{ habit.current_streak }}</p>
                     <a href="{% url 'habit_detail' habit.id %}" class="btn-detail">Detail</a>
                     <a href="{% url 'habit_update' habit.pk %}" class="btn-detail">Edit</a>
