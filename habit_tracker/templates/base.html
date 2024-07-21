@@ -11,6 +11,19 @@
             display: flex;
             justify-content: center;
         }
+        .progress-container {
+            display: flex;
+            align-items: center;
+            width: 65px;
+        }
+        .progress {
+            flex-grow: 1;
+        }
+        .level-text {
+            color: grey;
+            font-size: 1.0em;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -29,6 +42,15 @@
             </ul>
             <ul class="navbar-nav ml-auto">
                 {% if user.is_authenticated %}
+                        <li class="nav-item progress-container d-flex align-items-center">
+                        <span class="mr-2 level-text">Level {{ user.level }}:
+                        <div class="progress w-100">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="{{ user.get_progress_percentage }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ user.get_progress_percentage }}%;">
+                                {{ user.get_progress_percentage|floatformat:0 }}%
+                            </div>
+                        </div>
+                        </span>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'profile' %}">Profile</a>
                     </li>

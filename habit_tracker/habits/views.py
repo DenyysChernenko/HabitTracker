@@ -1,11 +1,30 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Habit
-from .forms import HabitForm
+from .forms import HabitForm, HabitUpdateCountForm
 from django.utils.dateparse import parse_date
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 
 # Create your views here.
+
+
+def habit_update_count(request, pk):
+    habit = get_object_or_404(Habit, pk=pk)
+    if request.method == 'POST':
+        form = HabitUpdateCountForm(request.POST, instance=habit)
+        if form.is_valid():
+            habit = form.save(commit=False)
+            habit.update_count()
+            form.save()
+            return redirect('habit_detail', pk=habit.pk)
+    else:
+        form = HabitUpdateCountForm(instance=habit)
+
+    context = {
+        'habit': habit,
+        'form': form
+    }
+    return render(request, 'habits/habit_update_count.html', context)
 
 
 class HabitDetail(DetailView):
@@ -47,7 +66,7 @@ class CreateHabit(CreateView):
 
 class UpdateHabit(UpdateView):
     model = Habit
-    fields = ['name', 'description', 'end_date', 'current_streak', 'is_completed']
+    fields = ['name', 'description', 'end_date', 'current_count']
     template_name_suffix = '_update_form'
     success_url = reverse_lazy('habit_list')
 
@@ -56,6 +75,11 @@ class UpdateHabit(UpdateView):
 
     def get_success_url(self):
         return reverse_lazy('habit_detail', kwargs={'pk': self.object.pk})
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        self.object.update_count()
+        return response
 
 
 class DeleteHabit(DeleteView):

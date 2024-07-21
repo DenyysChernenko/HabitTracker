@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/add.css' %}">
+{% endblock %}
+
+<section class="centered-section">
+    <div class="container">
+        <h1 class="my-4 text-center" style="font-family: 'Arial', sans-serif; font-weight: bold; color: #333; text-shadow: 1px 1px 1px #ccc;">Update Habit Count</h1>
+        <form class="needs-validation centered-form" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group text-center">
+                <label>Current Count:</label>
+                {{ form.current_count }}
+            </div>
+            <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+        <div class="text-center mt-3">
+            <a href="{% url 'habit_list' %}" class="btn btn-secondary">Back to List of Habits</a>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from levelconfigs.models import LevelConfig
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.models import BaseUserManager
 # Create your models here.
@@ -44,6 +45,17 @@ class User(AbstractUser):
 
     def __str__(self):
         return f"User with username: '{self.username}' and level: '{self.level}'"
+
+    def get_progress_percentage(self):
+        try:
+            current_level_config = LevelConfig.objects.get(level=self.level)
+            next_level_config = LevelConfig.objects.get(level=self.level + 1)
+            current_xp = self.experience - current_level_config.xp_required if self.level > 1 else self.experience
+            required_xp = next_level_config.xp_required - current_level_config.xp_required
+            progress = (current_xp / required_xp) * 100
+            return min(progress, 100)
+        except LevelConfig.DoesNotExist:
+            return 100
 
     class Meta:
 
