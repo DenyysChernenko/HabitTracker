@@ -57,8 +57,25 @@ class User(AbstractUser):
         except LevelConfig.DoesNotExist:
             return 100
 
-    class Meta:
+    def update_level(self):
 
+        try:
+            while True:
+                next_level_confing = LevelConfig.objects.get(level=self.level + 1)
+
+                if self.experience >= next_level_confing.xp_required:
+                    self.level += 1
+                else:
+                    break
+
+        except LevelConfig.DoesNotExist:
+            pass
+
+    def save(self, *args, **kwargs):
+        self.update_level()
+        super().save(*args, **kwargs)
+
+    class Meta:
         verbose_name = 'User'
         verbose_name_plural = 'Users'
 
