@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Habit
+from random import randint
 from .forms import HabitForm, HabitUpdateCountForm
 from django.utils.dateparse import parse_date
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
@@ -15,6 +16,10 @@ def habit_update_count(request, pk):
         if form.is_valid():
             habit = form.save(commit=False)
             habit.update_count()
+            random_xp = randint(1, 8) * habit.current_streak if habit.current_streak != 0 else randint(1, 8)
+            user = request.user
+            user.experience += random_xp
+            user.save()
             form.save()
             return redirect('habit_detail', pk=habit.pk)
     else:
