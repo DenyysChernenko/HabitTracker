@@ -14,6 +14,8 @@ class Habit(models.Model):
     end_date = models.DateField()
     habit_picture = models.ImageField(upload_to='habit_pics/', null=True, blank=True)
     current_streak = models.IntegerField(default=0)
+    required_count = models.IntegerField(default=1)
+    current_count = models.IntegerField(default=0)
     is_completed = models.BooleanField(default=False)
 
     created_at = models.DateTimeField(auto_now_add=True)
@@ -30,3 +32,10 @@ class Habit(models.Model):
         verbose_name = 'Habit'
         verbose_name_plural = 'Habits'
         ordering = ['name']
+
+    def update_count(self):
+        if self.current_count >= self.required_count:
+            self.is_completed = True
+        else:
+            self.is_completed = False
+        self.save()
